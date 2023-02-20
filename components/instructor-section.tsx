@@ -109,10 +109,10 @@ export default function InstructorSection({ instructor }: Props) {
           </div>
         </div>
       </div>
-      {instructor.talk && (
-        <div className={styles['talk-details']}>
-          <h3 className={styles['socials-header']}>{instructor.talk.title}</h3>
-          <p>{instructor.talk.description}</p>
+      {instructor.presentation && (
+        <div className={styles['presentation-details']}>
+          <h3 className={styles['socials-header']}>{instructor.presentation.title}</h3>
+          <p>{instructor.presentation.description}</p>
         </div>
       )}
     </>

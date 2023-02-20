@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { SHORT_DATE } from '@lib/constants';
 import { Stage } from '@lib/types';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import PresentationCard from './presentation-card';
 import styles from './schedule-sidebar.module.css';
 import Select from './select';
-import TalkCard from './talk-card';
-import { SHORT_DATE } from '@lib/constants';
 
 type Props = {
   allStages: Stage[];
@@ -54,9 +54,9 @@ export default function ScheduleSidebar({ allStages }: Props) {
           </option>
         ))}
       </Select>
-      <div className={styles.talks}>
-        {currentStage?.schedule.map(talk => (
-          <TalkCard key={talk.title} talk={talk} showTime />
+      <div className={styles.presentations}>
+        {currentStage?.schedule.map(presentation => (
+          <PresentationCard key={presentation.title} presentation={presentation} showTime />
         ))}
       </div>
     </div>

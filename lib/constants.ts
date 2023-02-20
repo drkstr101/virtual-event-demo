@@ -22,8 +22,7 @@ export const SITE_NAME_MULTILINE = ['Watheia', 'Labs'];
 export const SITE_NAME = 'Watheia Labs';
 export const META_DESCRIPTION =
   'This is an open source demo that Next.js developers can clone, deploy, and fully customize for events. Created through collaboration of marketers, designers, and developers at Vercel.';
-export const SITE_DESCRIPTION =
-  'An interactive online experience by the community, free for everyone.';
+export const SITE_DESCRIPTION = 'Hands-on instructor-lead courses for the future';
 export const DATE = '01 January 2024';
 export const SHORT_DATE = 'Jan 1 - 9:00am PST';
 export const FULL_DATE = 'Jan 1st 9am Pacific Time (GMT-7)';

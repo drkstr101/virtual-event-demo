@@ -7,7 +7,7 @@ import LinkButton from '../LinkButton';
 
 const data = [
   {
-    name: 'Moderator',
+    name: 'Admin',
     roleName: 'moderator',
     role: 'backstage',
     desc: `This role is meant for the event organisers. The moderator is like a stage admin - can add instructors, remove them, invite attendees on stage, kick them out of the event, etc`
@@ -20,7 +20,7 @@ const data = [
       'This one is self explanatory. Use this role for folks who are going to be the main guests of the session. Instructors can also invite attendees on the stage, and respond to public chat messages.'
   },
   {
-    name: 'Attendee',
+    name: 'Student',
     roleName: 'attendee',
     role: 'viewer',
     desc: `This one is the most basic role - can see and hear whatever is happening on the stage, cannot share their audio and video, and can put up messages on the public chat section.`

@@ -27,7 +27,7 @@ export type Instructor = {
   twitter: string;
   github: string;
   company: string;
-  talk: Talk;
+  presentation: Presentation;
   image: Image;
   imageSquare: Image;
 };
@@ -37,14 +37,14 @@ export type Stage = {
   slug: string;
   stream: string;
   discord: string;
-  schedule: Talk[];
+  schedule: Presentation[];
   isLive: boolean;
   roomId: string;
   stagePeers: string[];
   backstagePeers: string[];
 };
 
-export type Talk = {
+export type Presentation = {
   title: string;
   description: string;
   start: string;

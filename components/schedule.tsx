@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
+import { Presentation, Stage } from '@lib/types';
 import cn from 'classnames';
-import { Stage, Talk } from '@lib/types';
+import PresentationCard from './presentation-card';
 import styles from './schedule.module.css';
-import TalkCard from './talk-card';
 
 function StageRow({ stage }: { stage: Stage }) {
-  // Group talks by the time block
-  const timeBlocks = stage.schedule.reduce((allBlocks: any, talk) => {
-    allBlocks[talk.start] = [...(allBlocks[talk.start] || []), talk];
+  // Group presentations by the time block
+  const timeBlocks = stage.schedule.reduce((allBlocks: any, presentation) => {
+    allBlocks[presentation.start] = [...(allBlocks[presentation.start] || []), presentation];
     return allBlocks;
   }, {});
 
@@ -31,11 +31,15 @@ function StageRow({ stage }: { stage: Stage }) {
       <h3 className={cn(styles['stage-name'], styles[stage.slug])}>
         <span>{stage.name}</span>
       </h3>
-      <div className={cn(styles.talks, styles[stage.slug])}>
+      <div className={cn(styles.presentations, styles[stage.slug])}>
         {Object.keys(timeBlocks).map((startTime: string) => (
           <div key={startTime}>
-            {timeBlocks[startTime].map((talk: Talk, index: number) => (
-              <TalkCard key={talk.title} talk={talk} showTime={index === 0} />
+            {timeBlocks[startTime].map((presentation: Presentation, index: number) => (
+              <PresentationCard
+                key={presentation.title}
+                presentation={presentation}
+                showTime={index === 0}
+              />
             ))}
           </div>
         ))}

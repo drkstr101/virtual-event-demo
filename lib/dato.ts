@@ -52,7 +52,7 @@ export async function getAllInstructors(): Promise<Instructor[]> {
          twitter
          github
          company
-         talk {
+         presentation {
            title
            description
          }

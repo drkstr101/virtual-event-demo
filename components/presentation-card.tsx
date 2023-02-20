@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-import { Talk } from '@lib/types';
+import { Presentation } from '@lib/types';
 import cn from 'classnames';
 import { format, isAfter, isBefore, parseISO } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import styles from './talk-card.module.css';
+import styles from './presentation-card.module.css';
 
 type Props = {
   key: string;
-  talk: Talk;
+  presentation: Presentation;
   showTime: boolean;
 };
 
@@ -33,25 +33,28 @@ const formatDate = (date: string) => {
   return format(parseISO(date), "h:mmaaaaa'm'");
 };
 
-export default function TalkCard({ talk: { title, instructor, start, end }, showTime }: Props) {
-  const [isTalkLive, setIsTalkLive] = useState(false);
+export default function PresentationCard({
+  presentation: { title, instructor, start, end },
+  showTime
+}: Props) {
+  const [isPresentationLive, setIsPresentationLive] = useState(false);
   const [startAndEndTime, setStartAndEndTime] = useState('');
 
   useEffect(() => {
     const now = Date.now();
-    setIsTalkLive(isAfter(now, parseISO(start)) && isBefore(now, parseISO(end)));
+    setIsPresentationLive(isAfter(now, parseISO(start)) && isBefore(now, parseISO(end)));
     setStartAndEndTime(`${formatDate(start)} – ${formatDate(end)}`);
   }, [end, start]);
 
   const firstInstructorLink = `/instructors/${instructor[0].slug}`;
 
   return (
-    <div key={title} className={styles.talk}>
+    <div key={title} className={styles.presentation}>
       {showTime && <p className={styles.time}>{startAndEndTime || <>&nbsp;</>}</p>}
       <Link href={firstInstructorLink}>
         <a
           className={cn(styles.card, {
-            [styles['is-live']]: isTalkLive
+            [styles['is-live']]: isPresentationLive
           })}
         >
           <div className={styles['card-body']}>

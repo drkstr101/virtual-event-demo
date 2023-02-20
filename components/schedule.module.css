@@ -49,14 +49,14 @@
   color: var(--brand);
 }
 
-.talks {
+.presentations {
   display: flex;
   flex-direction: row;
   width: 100%;
   margin-top: 40px;
 }
 
-.talks > div {
+.presentations > div {
   margin-right: 24px;
 }
 
@@ -72,7 +72,7 @@
     padding: var(--space-8x) 0;
   }
 
-  .talks {
+  .presentations {
     flex-direction: row;
     margin-top: 0;
   }
