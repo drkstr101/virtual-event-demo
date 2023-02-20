@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-import Link from 'next/link';
-import cn from 'classnames';
-import { useRouter } from 'next/router';
-import { SkipNavContent } from '@reach/skip-nav';
 import { NAVIGATION } from '@lib/constants';
-import styles from './layout.module.css';
-import Logo from './icons/icon-logo';
-import MobileMenu from './mobile-menu';
-import Footer from './footer';
+import { SkipNavContent } from '@reach/skip-nav';
+import cn from 'classnames';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
+import Footer from './footer';
+import { hmsConfig } from './hms/config';
 import DemoButton from './hms/demo-cta';
 import RoomCta from './hms/demo-cta/room-cta';
-import { hmsConfig } from './hms/config';
+import Logo from './icons/icon-logo';
+import styles from './layout.module.css';
+import MobileMenu from './mobile-menu';
 import ViewSource from './view-source';
 
 type Props = {
@@ -46,7 +46,7 @@ export default function Layout({
 }: Props) {
   const router = useRouter();
   const activeRoute = router.asPath;
-  const disableCta = ['/schedule', '/speakers', '/expo', '/jobs'];
+  const disableCta = ['/schedule', '/instructors', '/expo', '/jobs'];
 
   return (
     <>

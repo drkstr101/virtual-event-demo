@@ -36,7 +36,7 @@
   color: #fff;
 }
 
-.speaker-details {
+.instructor-details {
   padding: var(--space-4x) 0;
   display: flex;
   flex-direction: column;
@@ -69,7 +69,7 @@
     padding-bottom: 0;
   }
 
-  .speaker-details {
+  .instructor-details {
     padding: 0;
     padding-left: var(--space-8x);
   }

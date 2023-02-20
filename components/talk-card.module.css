@@ -55,7 +55,7 @@
   width: 100%;
 }
 
-.speaker {
+.instructor {
   display: flex;
   align-items: center;
   margin-top: var(--space-2x);

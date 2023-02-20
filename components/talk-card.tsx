@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
+import { Talk } from '@lib/types';
 import cn from 'classnames';
+import { format, isAfter, isBefore, parseISO } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import { parseISO, format, isBefore, isAfter } from 'date-fns';
-import { Talk } from '@lib/types';
+import { useEffect, useState } from 'react';
 import styles from './talk-card.module.css';
 
 type Props = {
@@ -33,7 +33,7 @@ const formatDate = (date: string) => {
   return format(parseISO(date), "h:mmaaaaa'm'");
 };
 
-export default function TalkCard({ talk: { title, speaker, start, end }, showTime }: Props) {
+export default function TalkCard({ talk: { title, instructor, start, end }, showTime }: Props) {
   const [isTalkLive, setIsTalkLive] = useState(false);
   const [startAndEndTime, setStartAndEndTime] = useState('');
 
@@ -43,12 +43,12 @@ export default function TalkCard({ talk: { title, speaker, start, end }, showTim
     setStartAndEndTime(`${formatDate(start)} – ${formatDate(end)}`);
   }, [end, start]);
 
-  const firstSpeakerLink = `/speakers/${speaker[0].slug}`;
+  const firstInstructorLink = `/instructors/${instructor[0].slug}`;
 
   return (
     <div key={title} className={styles.talk}>
       {showTime && <p className={styles.time}>{startAndEndTime || <>&nbsp;</>}</p>}
-      <Link href={firstSpeakerLink}>
+      <Link href={firstInstructorLink}>
         <a
           className={cn(styles.card, {
             [styles['is-live']]: isTalkLive
@@ -58,9 +58,9 @@ export default function TalkCard({ talk: { title, speaker, start, end }, showTim
             <h4 title={title} className={styles.title}>
               {title}
             </h4>
-            <div className={styles.speaker}>
+            <div className={styles.instructor}>
               <div className={styles['avatar-group']}>
-                {speaker.map(s => (
+                {instructor.map(s => (
                   <div key={s.name} className={styles['avatar-wrapper']}>
                     <Image
                       loading="lazy"
@@ -75,7 +75,7 @@ export default function TalkCard({ talk: { title, speaker, start, end }, showTim
                 ))}
               </div>
               <h5 className={styles.name}>
-                {speaker.length === 1 ? speaker[0].name : `${speaker.length} speakers`}
+                {instructor.length === 1 ? instructor[0].name : `${instructor.length} instructors`}
               </h5>
             </div>
           </div>

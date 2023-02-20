@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from '@100mslive/react-icons';
 import HmsLogo from '@components/icons/icon-hms';
-import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import Button from '../Button';
 import LinkButton from '../LinkButton';
 
@@ -10,14 +10,14 @@ const data = [
     name: 'Moderator',
     roleName: 'moderator',
     role: 'backstage',
-    desc: `This role is meant for the event organisers. The moderator is like a stage admin - can add speakers, remove them, invite attendees on stage, kick them out of the event, etc`
+    desc: `This role is meant for the event organisers. The moderator is like a stage admin - can add instructors, remove them, invite attendees on stage, kick them out of the event, etc`
   },
   {
-    name: 'Speaker',
-    roleName: 'speaker',
+    name: 'Instructor',
+    roleName: 'instructor',
     role: 'stage',
     desc:
-      'This one is self explanatory. Use this role for folks who are going to be the main guests of the session. Speakers can also invite attendees on the stage, and respond to public chat messages.'
+      'This one is self explanatory. Use this role for folks who are going to be the main guests of the session. Instructors can also invite attendees on the stage, and respond to public chat messages.'
   },
   {
     name: 'Attendee',

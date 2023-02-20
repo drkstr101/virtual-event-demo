@@ -1,50 +1,51 @@
 import {
-  useHMSStore,
-  useVideoList,
-  selectDominantSpeaker,
-  selectLocalPeer,
-  selectPeersByRole,
   HMSPeer,
+  selectDominantSpeaker,
   selectIsSomeoneScreenSharing,
-  selectPeers
+  selectLocalPeer,
+  selectPeers,
+  selectPeersByRole,
+  useHMSStore,
+  useVideoList
 } from '@100mslive/react-sdk';
 import React, { useEffect, useState } from 'react';
-import VideoTile from './VideoTile';
-import RoleChangeDialog from './request';
-import EmptyRoom from './EmptyRoom';
-import Pagination from './Pagination';
-import MobileView from './mobile';
 import { hmsConfig } from './config';
+import EmptyRoom from './EmptyRoom';
+import MobileView from './mobile';
+import Pagination from './Pagination';
+import RoleChangeDialog from './request';
 import ScreenshareTile from './ScreenshareTile';
+import VideoTile from './VideoTile';
 
 const VideoList = () => {
-  const activeSpeakerThreshold = hmsConfig.activeSpeakerThreshold;
+  const activeInstructorThreshold = hmsConfig.activeInstructorThreshold;
   const stagePeers = useHMSStore(selectPeersByRole('stage'));
   const peers = useHMSStore(selectPeers);
   const localPeer = useHMSStore(selectLocalPeer);
   const renderPeers = peers.filter(p => p.roleName !== 'viewer');
-  const [activeSpeaker, setActiveSpeaker] = useState(localPeer);
-  const dominantSpeaker = useHMSStore(selectDominantSpeaker);
-  const isActiveSpeakerModeOn = activeSpeaker && renderPeers.length > activeSpeakerThreshold;
-  /** here we are using peer filter function to change the activeSpeaker and sidebarPeers,
-   * on first mount activeSpeaker points to the localPeer and on each update it points
-   * to the dominantSpeaker
+  const [activeInstructor, setActiveInstructor] = useState(localPeer);
+  const dominantInstructor = useHMSStore(selectDominantSpeaker);
+  const isActiveInstructorModeOn =
+    activeInstructor && renderPeers.length > activeInstructorThreshold;
+  /** here we are using peer filter function to change the activeInstructor and sidebarPeers,
+   * on first mount activeInstructor points to the localPeer and on each update it points
+   * to the dominantInstructor
    */
-  const peerFilter = (dominantSpeaker: HMSPeer) => {
-    if (dominantSpeaker) {
-      setActiveSpeaker(dominantSpeaker);
+  const peerFilter = (dominantInstructor: HMSPeer) => {
+    if (dominantInstructor) {
+      setActiveInstructor(dominantInstructor);
     }
   };
 
   useEffect(() => {
-    if (dominantSpeaker) {
-      peerFilter(dominantSpeaker);
+    if (dominantInstructor) {
+      peerFilter(dominantInstructor);
     } else {
       if (localPeer.roleName === 'viewer' && stagePeers.length > 0) {
-        setActiveSpeaker(stagePeers[0]);
+        setActiveInstructor(stagePeers[0]);
       }
     }
-  }, [dominantSpeaker, stagePeers, localPeer.roleName]);
+  }, [dominantInstructor, stagePeers, localPeer.roleName]);
   const isSomeoneScreenSharing = useHMSStore(selectIsSomeoneScreenSharing);
 
   return (
@@ -55,10 +56,10 @@ const VideoList = () => {
       >
         {renderPeers.length > 0 ? (
           <>
-            {isActiveSpeakerModeOn || isSomeoneScreenSharing ? (
-              <ActiveSpeaker allPeers={renderPeers} activePeer={activeSpeaker} />
+            {isActiveInstructorModeOn || isSomeoneScreenSharing ? (
+              <ActiveInstructor allPeers={renderPeers} activePeer={activeInstructor} />
             ) : (
-              <NonActiveSpeakerView peers={renderPeers} />
+              <NonActiveInstructorView peers={renderPeers} />
             )}
           </>
         ) : (
@@ -66,14 +67,14 @@ const VideoList = () => {
         )}
       </div>
       <RoleChangeDialog />
-      <MobileView allPeers={renderPeers} activePeer={activeSpeaker} />
+      <MobileView allPeers={renderPeers} activePeer={activeInstructor} />
     </>
   );
 };
 
 export default VideoList;
 
-const NonActiveSpeakerView: React.FC<{ peers: HMSPeer[] }> = ({ peers }) => {
+const NonActiveInstructorView: React.FC<{ peers: HMSPeer[] }> = ({ peers }) => {
   const { pagesWithTiles, ref } = useVideoList({
     maxColCount: 2,
     maxRowCount: 2,
@@ -97,7 +98,7 @@ const NonActiveSpeakerView: React.FC<{ peers: HMSPeer[] }> = ({ peers }) => {
   );
 };
 
-const ActiveSpeaker: React.FC<{ activePeer: HMSPeer; allPeers: HMSPeer[] }> = ({
+const ActiveInstructor: React.FC<{ activePeer: HMSPeer; allPeers: HMSPeer[] }> = ({
   allPeers,
   activePeer
 }) => {
@@ -108,7 +109,7 @@ const ActiveSpeaker: React.FC<{ activePeer: HMSPeer; allPeers: HMSPeer[] }> = ({
   return (
     <>
       {isSomeoneScreenSharing ? <ScreenshareTile /> : <ActiveTile activePeer={activePeer} />}
-      <AllSpeakers allPeers={peers} />
+      <AllInstructors allPeers={peers} />
     </>
   );
 };
@@ -136,10 +137,10 @@ const ActiveTile: React.FC<{ activePeer: HMSPeer }> = ({ activePeer }) => {
   );
 };
 
-const AllSpeakers: React.FC<{ allPeers: HMSPeer[] }> = ({ allPeers }) => {
+const AllInstructors: React.FC<{ allPeers: HMSPeer[] }> = ({ allPeers }) => {
   const { pagesWithTiles, ref } = useVideoList({
     maxRowCount: 1,
-    maxTileCount: hmsConfig.maxTileCountSpeakers,
+    maxTileCount: hmsConfig.maxTileCountInstructors,
     peers: allPeers,
     aspectRatio: hmsConfig.aspectRatio
   });

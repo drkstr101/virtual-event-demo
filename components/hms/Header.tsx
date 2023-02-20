@@ -1,14 +1,13 @@
 import { ExitIcon, SpeakerIcon } from '@100mslive/react-icons';
 import {
-  useHMSActions,
-  useHMSStore,
   selectDominantSpeaker,
   selectLocalPeer,
-  selectPeersByRole
+  selectPeersByRole,
+  useHMSActions,
+  useHMSStore
 } from '@100mslive/react-sdk';
 import UsersIcon from '@components/icons/icon-users';
 import { useRouter } from 'next/router';
-import React from 'react';
 
 const Header = () => {
   const router = useRouter();

@@ -1,15 +1,15 @@
-import React from 'react';
-import Avatar from '../Avatar';
 import {
-  useHMSStore,
-  useVideoList,
   HMSPeer,
   selectIsSomeoneScreenSharing,
-  selectPeersByRole
+  selectPeersByRole,
+  useHMSStore,
+  useVideoList
 } from '@100mslive/react-sdk';
-import VideoTile from '../VideoTile';
-import ScreenshareTile from '../ScreenshareTile';
+import React from 'react';
+import Avatar from '../Avatar';
 import { hmsConfig } from '../config';
+import ScreenshareTile from '../ScreenshareTile';
+import VideoTile from '../VideoTile';
 
 const MobileView: React.FC<{ activePeer: HMSPeer; allPeers: HMSPeer[] }> = ({
   activePeer,
@@ -22,7 +22,7 @@ const MobileView: React.FC<{ activePeer: HMSPeer; allPeers: HMSPeer[] }> = ({
         <MobileHeader />
       ) : (
         <div className="w-full h-full flex items-center justify-center font-medium">
-          No Speakers Present
+          No Instructors Present
         </div>
       )}
       {isSomeoneScreenSharing ? <ScreenshareTile /> : <VideoList peer={activePeer} />}

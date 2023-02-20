@@ -1,26 +1,26 @@
 import {
-  useHMSStore,
-  useVideoList,
-  selectLocalPeer,
+  HMSPeer,
   selectDominantSpeaker,
-  HMSPeer
+  selectLocalPeer,
+  useHMSStore,
+  useVideoList
 } from '@100mslive/react-sdk';
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { hmsConfig } from './config';
 import VideoTile from './VideoTile';
 
-const ActiveSpeaker = () => {
+const ActiveInstructor = () => {
   const localPeer = useHMSStore(selectLocalPeer);
-  const [activeSpeaker, setActiveSpeaker] = useState(localPeer);
-  const dominantSpeaker = useHMSStore(selectDominantSpeaker);
+  const [activeInstructor, setActiveInstructor] = useState(localPeer);
+  const dominantInstructor = useHMSStore(selectDominantSpeaker);
 
-  const peerFilter = (dominantSpeaker: HMSPeer) => {
-    if (dominantSpeaker) {
-      setActiveSpeaker(dominantSpeaker);
+  const peerFilter = (dominantInstructor: HMSPeer) => {
+    if (dominantInstructor) {
+      setActiveInstructor(dominantInstructor);
     }
   };
 
-  const prevPeer = usePrevious(activeSpeaker);
+  const prevPeer = usePrevious(activeInstructor);
 
   const getPeer = useCallback(() => {
     if (localPeer.roleName === 'viewer') {
@@ -31,12 +31,12 @@ const ActiveSpeaker = () => {
   }, [localPeer, prevPeer]);
 
   useEffect(() => {
-    peerFilter(dominantSpeaker || getPeer());
-  }, [dominantSpeaker, getPeer]);
+    peerFilter(dominantInstructor || getPeer());
+  }, [dominantInstructor, getPeer]);
 
   const { pagesWithTiles, ref } = useVideoList({
     maxTileCount: 1,
-    peers: [activeSpeaker],
+    peers: [activeInstructor],
     aspectRatio: hmsConfig.aspectRatio
   });
   return (
@@ -57,7 +57,7 @@ const ActiveSpeaker = () => {
   );
 };
 
-export default ActiveSpeaker;
+export default ActiveInstructor;
 
 function usePrevious(value: HMSPeer): HMSPeer | undefined {
   const ref = useRef<HMSPeer>();

@@ -12,7 +12,7 @@ This virtual event starter kit was used to run [Next.js Conf 2020](https://next
 - Sponsor expo, including individual virtual booths
 - Career Fair, allowing attendees to network and find job opportunities
 - Ticket registration and generation
-- Speaker pages and bios
+- Instructor pages and bios
 - Schedule
 
 This platform is built upon three principles:
@@ -37,7 +37,7 @@ This platform is built upon three principles:
 
 ## What’s New?
 
-The virtual events starter kit now has added support for organising truly LIVE virtual events. You can quickly setup a live stage and invite speakers to interact with viewers. Live audio-video opens up a ton of possibilities with respect to what you can do with this template. You can use it for:
+The virtual events starter kit now has added support for organising truly LIVE virtual events. You can quickly setup a live stage and invite instructors to interact with viewers. Live audio-video opens up a ton of possibilities with respect to what you can do with this template. You can use it for:
 
 1. Live Webinars
 2. Community Calls
@@ -58,10 +58,12 @@ You’ll be asked to install the **100ms with DatoCMS** integration. It lets yo
 <<<<<<< HEAD
 [![Clone DatoCMS project](https://dashboard.datocms.com/clone/button.svg)](https://dashboard.datocms.com/deploy?repo=datocms%2Fvirtual-event-starter-kit%3Amain)
 =======
+
 > **NOTE:** Before this setup make sure to deploy the project using 100ms + DatoCMS integration to speed up the setup process.
 
 After the project is deployed on Vercel, you can find `DATOCMS_READ_ONLY_API_TOKEN` and `NEXT_PUBLIC_HMS_TOKEN_ENDPOINT` already setup in the environment-variables section in project settings. The integration also sets up the [rooms](https://docs.100ms.live/server-side/v2/features/room), [templates & roles](https://docs.100ms.live/server-side/v2/foundation/templates-and-roles) associated with it.
->>>>>>> upstream/main
+
+> > > > > > > upstream/main
 
 First, to set local environment variables you can either use Vercel CLI [vercel env pull](https://vercel.com/docs/cli#commands/env) or just manually copy paste them.
 
@@ -93,7 +95,7 @@ Visit `/stage/a` after entering your email you should see a "Enter your name" in
 
 ![join](/media/join.png)
 
-Click on Join and you should see "No Speakers Present". This is because only you have joined the Stage aka the "Room" as a viewer. A viewer does not have the permission to publish their audio and video. You can read more about roles in the sections below.
+Click on Join and you should see "No Instructors Present". This is because only you have joined the Stage aka the "Room" as a viewer. A viewer does not have the permission to publish their audio and video. You can read more about roles in the sections below.
 
 ![stage.png](/media/stage.png)
 
@@ -103,7 +105,7 @@ For this we pass a query param in url for eg: `/stage/a?role=<ROLE_NAME>`
 
 - Moderator: `/stage/a?role=backstage`
 
-- Speaker: `/stage/a?role=stage`
+- Instructor: `/stage/a?role=stage`
 
 - Viewer: `/stage/a`
 

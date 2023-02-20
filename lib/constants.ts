@@ -57,8 +57,8 @@ export const NAVIGATION = [
     route: '/schedule'
   },
   {
-    name: 'Speakers',
-    route: '/speakers'
+    name: 'Instructors',
+    route: '/instructors'
   },
   {
     name: 'Expo',

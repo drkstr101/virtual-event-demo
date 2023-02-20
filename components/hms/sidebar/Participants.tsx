@@ -1,5 +1,4 @@
-import { useHMSStore, selectLocalPeer, selectPeersByRole } from '@100mslive/react-sdk';
-import React from 'react';
+import { selectLocalPeer, selectPeersByRole, useHMSStore } from '@100mslive/react-sdk';
 import Avatar from '../Avatar';
 import Dropdown from './Dropdown';
 
@@ -32,7 +31,7 @@ const Participants = () => {
       ) : null}
       {stagePeers.length > 0 ? (
         <div>
-          <p className="flex items-center">Speaker ({stagePeers.length})</p>
+          <p className="flex items-center">Instructor ({stagePeers.length})</p>
           {stagePeers.map(p => (
             <div key={p.id} className="flex items-center my-4">
               <Avatar name={p.name} />
@@ -48,7 +47,7 @@ const Participants = () => {
 
       {inviteePeers.length > 0 ? (
         <div>
-          <p className="flex items-center">Guest Speakers ({inviteePeers.length})</p>
+          <p className="flex items-center">Guest Instructors ({inviteePeers.length})</p>
           {inviteePeers.map(p => (
             <div key={p.id} className="flex items-center my-4">
               <Avatar name={p.name} />

@@ -1,14 +1,14 @@
-import React from 'react';
-import cn from 'classnames';
-import styleUtils from '../utils.module.css';
-import styles from '../conf-entry.module.css';
-import { PreviewScreen } from './preview';
-import { useHMSActions } from '@100mslive/react-sdk';
 import { parsedUserAgent } from '@100mslive/hms-video';
-import * as Dialog from '@radix-ui/react-dialog';
-import Button from './Button';
 import { ArrowRightIcon } from '@100mslive/react-icons';
+import { useHMSActions } from '@100mslive/react-sdk';
+import * as Dialog from '@radix-ui/react-dialog';
+import cn from 'classnames';
 import { useRouter } from 'next/router';
+import React from 'react';
+import styles from '../conf-entry.module.css';
+import styleUtils from '../utils.module.css';
+import Button from './Button';
+import { PreviewScreen } from './preview';
 
 interface Props {
   token: string;
@@ -95,7 +95,7 @@ const MobileRoleDialog = () => {
     <Dialog.Root open={true}>
       <Dialog.Overlay className="fixed inset-0" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} />
       <Dialog.Content className="dialog-content bg-gray-700 md:w-96 w-[95%] rounded-lg text-center dialog-animation">
-        <h3>Joining as a speaker is not supported on mobile</h3>
+        <h3>Joining as a instructor is not supported on mobile</h3>
         <p className="text-xs text-gray-200 mt-4">
           We have setup a few profiles to make it easy for you or your team to experience each
           perspective. Join in one click or share access with anyone else.

@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-import { GetStaticProps, GetStaticPaths } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
-import Page from '@components/page';
-import SpeakerSection from '@components/speaker-section';
+import InstructorSection from '@components/instructor-section';
 import Layout from '@components/layout';
+import Page from '@components/page';
 
-import { getAllSpeakers } from '@lib/cms-api';
-import { Speaker } from '@lib/types';
+import { getAllInstructors } from '@lib/cms-api';
 import { META_DESCRIPTION } from '@lib/constants';
+import { Instructor } from '@lib/types';
 
 type Props = {
-  speaker: Speaker;
+  instructor: Instructor;
 };
 
-export default function SpeakerPage({ speaker }: Props) {
+export default function InstructorPage({ instructor }: Props) {
   const meta = {
     title: 'Demo - Virtual Event Starter Kit',
     description: META_DESCRIPTION
@@ -37,7 +37,7 @@ export default function SpeakerPage({ speaker }: Props) {
   return (
     <Page meta={meta}>
       <Layout>
-        <SpeakerSection speaker={speaker} />
+        <InstructorSection instructor={instructor} />
       </Layout>
     </Page>
   );
@@ -45,10 +45,10 @@ export default function SpeakerPage({ speaker }: Props) {
 
 export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const slug = params?.slug;
-  const speakers = await getAllSpeakers();
-  const currentSpeaker = speakers.find((s: Speaker) => s.slug === slug) || null;
+  const instructors = await getAllInstructors();
+  const currentInstructor = instructors.find((s: Instructor) => s.slug === slug) || null;
 
-  if (!currentSpeaker) {
+  if (!currentInstructor) {
     return {
       notFound: true
     };
@@ -56,15 +56,15 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
 
   return {
     props: {
-      speaker: currentSpeaker
+      instructor: currentInstructor
     },
     revalidate: 60
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const speakers = await getAllSpeakers();
-  const slugs = speakers.map((s: Speaker) => ({ params: { slug: s.slug } }));
+  const instructors = await getAllInstructors();
+  const slugs = instructors.map((s: Instructor) => ({ params: { slug: s.slug } }));
 
   return {
     paths: slugs,

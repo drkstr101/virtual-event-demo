@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React, { useEffect, useRef, useState } from 'react';
+import { AudioLevelIcon, CrossIcon } from '@100mslive/react-icons';
 import * as Dialog from '@radix-ui/react-dialog';
-import { CrossIcon } from '@100mslive/react-icons';
-import Select from './select';
-import { AudioLevelIcon } from '@100mslive/react-icons';
+import React, { useEffect, useRef, useState } from 'react';
 import Button from './Button';
-import { useDevices, DeviceType } from './lib/useDevices';
+import { DeviceType, useDevices } from './lib/useDevices';
+import Select from './select';
 
 const SettingDialog: React.FC = ({ children }) => {
   const { allDevices, selectedDeviceIDs, updateDevice, isAllowedToPublish } = useDevices();
@@ -72,7 +71,7 @@ const SettingDialog: React.FC = ({ children }) => {
         ) : null}
         {audioOutput.length > 0 ? (
           <div className={wrapperClass}>
-            <span className={textClass}>Speaker</span>
+            <span className={textClass}>Instructor</span>
             <Select
               onChange={e =>
                 updateDevice({

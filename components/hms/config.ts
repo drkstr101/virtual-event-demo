@@ -1,8 +1,8 @@
 export const hmsConfig = {
   /**
-   * no. of tiles rendered before active speaker mode actviates
+   * no. of tiles rendered before active instructor mode actviates
    */
-  activeSpeakerThreshold: 2,
+  activeInstructorThreshold: 2,
   /**
    * aspect ratio of video tiles
    */
@@ -11,9 +11,9 @@ export const hmsConfig = {
     height: 1
   },
   /**
-   * maximum no.of tiles that can be rendered in speakers row
+   * maximum no.of tiles that can be rendered in instructors row
    */
-  maxTileCountSpeakers: 5,
+  maxTileCountInstructors: 5,
   /**
    * Turn off 100ms added things ->
    * Disable for removing Invite change role CTAs

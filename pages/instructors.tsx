@@ -16,40 +16,40 @@
 
 import { GetStaticProps } from 'next';
 
-import Page from '@components/page';
-import SpeakersGrid from '@components/speakers-grid';
-import Layout from '@components/layout';
 import Header from '@components/header';
+import InstructorsGrid from '@components/instructors-grid';
+import Layout from '@components/layout';
+import Page from '@components/page';
 
-import { getAllSpeakers } from '@lib/cms-api';
-import { Speaker } from '@lib/types';
+import { getAllInstructors } from '@lib/cms-api';
 import { META_DESCRIPTION } from '@lib/constants';
+import { Instructor } from '@lib/types';
 
 type Props = {
-  speakers: Speaker[];
+  instructors: Instructor[];
 };
 
-export default function Speakers({ speakers }: Props) {
+export default function Instructors({ instructors }: Props) {
   const meta = {
-    title: 'Speakers - Virtual Event Starter Kit',
+    title: 'Instructors - Virtual Event Starter Kit',
     description: META_DESCRIPTION
   };
   return (
     <Page meta={meta}>
       <Layout>
-        <Header hero="Speakers" description={meta.description} />
-        <SpeakersGrid speakers={speakers} />
+        <Header hero="Instructors" description={meta.description} />
+        <InstructorsGrid instructors={instructors} />
       </Layout>
     </Page>
   );
 }
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const speakers = await getAllSpeakers();
+  const instructors = await getAllInstructors();
 
   return {
     props: {
-      speakers
+      instructors
     },
     revalidate: 60
   };

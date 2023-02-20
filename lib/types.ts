@@ -19,7 +19,7 @@ export type Image = {
   blurDataURL?: string;
 };
 
-export type Speaker = {
+export type Instructor = {
   name: string;
   bio: string;
   title: string;
@@ -49,7 +49,7 @@ export type Talk = {
   description: string;
   start: string;
   end: string;
-  speaker: Speaker[];
+  instructor: Instructor[];
 };
 
 export type Link = {

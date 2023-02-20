@@ -13,19 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Job, Sponsor, Stage, Speaker } from '@lib/types';
+import { Instructor, Job, Sponsor, Stage } from '@lib/types';
 
 import * as datoCmsApi from './dato';
 
 const cmsApi: {
-  getAllSpeakers: () => Promise<Speaker[]>;
+  getAllInstructors: () => Promise<Instructor[]>;
   getAllStages: () => Promise<Stage[]>;
   getAllSponsors: () => Promise<Sponsor[]>;
   getAllJobs: () => Promise<Job[]>;
 } = datoCmsApi;
 
-export async function getAllSpeakers(): Promise<Speaker[]> {
-  return cmsApi.getAllSpeakers();
+export async function getAllInstructors(): Promise<Instructor[]> {
+  return cmsApi.getAllInstructors();
 }
 
 export async function getAllStages(): Promise<Stage[]> {

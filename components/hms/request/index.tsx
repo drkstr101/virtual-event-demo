@@ -1,26 +1,31 @@
-import { selectDevices, selectLocalPeerRole, selectRoleChangeRequest } from '@100mslive/react-sdk';
-import { useHMSActions, useHMSStore } from '@100mslive/react-sdk';
-import React, { useRef, useState } from 'react';
+import {
+  selectDevices,
+  selectLocalPeerRole,
+  selectRoleChangeRequest,
+  useHMSActions,
+  useHMSStore
+} from '@100mslive/react-sdk';
 import * as Dialog from '@radix-ui/react-dialog';
-import s from './index.module.css';
-import Select from '../select';
+import React, { useRef, useState } from 'react';
 import { isMobileDevice } from '../Join';
+import Select from '../select';
+import s from './index.module.css';
 
 import {
-  MicOnIcon,
-  MicOffIcon,
-  VideoOnIcon,
-  VideoOffIcon,
-  SettingIcon,
   ArrowRightIcon,
-  CrossIcon
+  CrossIcon,
+  MicOffIcon,
+  MicOnIcon,
+  SettingIcon,
+  VideoOffIcon,
+  VideoOnIcon
 } from '@100mslive/react-icons';
 import InfoIcon from '@components/icons/icon-info';
 import router from 'next/router';
-import { TestAudio } from '../SettingDialog';
 import Avatar from '../Avatar';
-import IconButton from '../preview/IconButton';
 import Button from '../Button';
+import IconButton from '../preview/IconButton';
+import { TestAudio } from '../SettingDialog';
 
 const RoleChangeDialog = () => {
   const isMobile = isMobileDevice();
@@ -112,7 +117,7 @@ const RoleChangeDialog = () => {
             <h3>{requestSenderName.current} has invited you to speak</h3>
             <p>
               You cannot join the stage on mobile. Please join the session via a desktop/laptop and
-              ask the speaker for another invite.{' '}
+              ask the instructor for another invite.{' '}
             </p>
             <Dialog.Close asChild>
               <Button>Got it</Button>
@@ -243,7 +248,7 @@ const GuestPreview: React.FC<{ roleChange: (b: boolean) => void }> = ({ roleChan
               ) : null}
               {audioOutput.length > 0 ? (
                 <div className={wrapperClass}>
-                  <span className={textClass}>Speaker</span>
+                  <span className={textClass}>Instructor</span>
                   <Select onChange={e => handleAudioOutput(e.target.value)} value={aO}>
                     {audioOutput.map((device: MediaDeviceInfo) => (
                       <option value={device.deviceId} key={device.deviceId}>
